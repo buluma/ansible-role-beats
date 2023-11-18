@@ -26,3 +26,37 @@ provisioner:
   name: ansible
 verifier:
   name: ansible
+<<<<<<< HEAD
+=======
+scenario:
+  create_sequence:
+    - create
+    - prepare
+  check_sequence:
+    - cleanup
+    - destroy
+    - create
+    - prepare
+    - converge
+    - check
+    - destroy
+  converge_sequence:
+    - create
+    - prepare
+    - converge
+  destroy_sequence:
+    - cleanup
+    - destroy
+  test_sequence:
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
+>>>>>>> d70f9b0f3fba144fd82dd5b764447c33ba868506
