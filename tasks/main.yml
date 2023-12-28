@@ -39,6 +39,8 @@
     state: started
     enabled: yes
   with_items: "{{ beats_client_beats_packages }}"
+  tags:
+    - molecule-notest
 
 - name: Load default templates into elasticsearch
   ansible.builtin.command: |

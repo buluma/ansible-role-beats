@@ -13,6 +13,4 @@
       changed_when: false
 
   roles:
-    # - role: buluma.bootstrap
-    # - role: buluma.apache
     - role: buluma.beats
