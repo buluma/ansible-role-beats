@@ -14,5 +14,5 @@
   become: yes
   ansible.builtin.service:
     name: topbeat
-    state: running
+    state: started
     enabled: yes
