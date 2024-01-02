@@ -26,8 +26,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       changed_when: false
 
   roles:
-    # - role: buluma.bootstrap
-    # - role: buluma.apache
     - role: buluma.beats
 ```
 
@@ -35,7 +33,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
 ```yaml
 ---
-- name: prepare
+- name: Prepare
   hosts: all
   become: yes
   gather_facts: no
@@ -279,5 +277,3 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 [Shadow Walker](https://buluma.github.io/)
 
-
-Template inspired by [Robert de Bock](https://github.com/robertdebock)
