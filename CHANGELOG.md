@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-beats/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-beats/compare/0.2.0...HEAD)
+
+**Merged pull requests:**
+
+- Bump release-drafter/release-drafter from 5 to 6 [\#13](https://github.com/buluma/ansible-role-beats/pull/13) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.2.0](https://github.com/buluma/ansible-role-beats/tree/0.2.0) (2024-01-20)
 
 [Full Changelog](https://github.com/buluma/ansible-role-beats/compare/0.1.0...0.2.0)
