@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-beats/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-beats/compare/24.2.26...HEAD)
+
+**Merged pull requests:**
+
+- Bump buluma/dependabot-auto-merge-action from 2.1.1 to 2.1.2 [\#14](https://github.com/buluma/ansible-role-beats/pull/14) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [24.2.26](https://github.com/buluma/ansible-role-beats/tree/24.2.26) (2024-02-17)
 
 [Full Changelog](https://github.com/buluma/ansible-role-beats/compare/0.2.0...24.2.26)
