@@ -21,7 +21,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
+      apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
       changed_when: false
 
@@ -35,8 +35,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: buluma.bootstrap
@@ -62,9 +62,9 @@ beats_client_beats_packages:
 # Identifier for host sending logs. Sane default as hostname.
 beats_client_shipper_name: "{{ ansible_hostname }}"
 
-beats_client_version: 6.1.2
+beats_client_version: "6.1.2"
 # The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
-beats_client_major_version_abbreviated: 6.x
+beats_client_major_version_abbreviated: "6.x"
 
 beats_client_beats_prereq:
   - apt-transport-https
@@ -78,7 +78,7 @@ beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ bea
 
 # Whether to inject templates (should really only be run on the same system that
 # has direct elasticsearch access
-beats_client_inject_templates: no
+beats_client_inject_templates: false
 
 #### FILEBEAT ##################################################################
 
@@ -195,14 +195,14 @@ beats_client_heartbeat_config: {}
 #        enabled: true
 #        index: "{{ beats_client_kibana_indices['metricbeat'] }}"
 
-beats_client_kibana_url_base: http://localhost:9200
+beats_client_kibana_url_base: "http://localhost:9200"
 beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
 beats_client_kibana_indices:
   metricbeat: metrics-logstash-*
   filebeat: syslog-*
-beats_client_kibana_dash_search:
-  metricbeat: Metricbeat*
-  filebeat: Filebeat*
+# beats_client_kibana_dash_search:
+#   metricbeat: Metricbeat*
+#   filebeat: Filebeat*
 
 #### SHARED ##################################################################
 

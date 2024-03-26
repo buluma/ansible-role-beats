@@ -46,9 +46,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - image: "debian-systemd"
-            tag: "latest"
-          - image: "debian-systemd"
+          - image: "docker-molecule-images"
+            tag: "buster"
+          - image: "docker-molecule-images"
             tag: "bullseye"
     steps:
       - name: Checkout Role
@@ -60,6 +60,8 @@ jobs:
         with:
           image: ${{ matrix.config.image }}
           tag: ${{ matrix.config.tag }}
+      - name: Running Role Test
+        run: ansible-galaxy role import --api-key ${{ secrets.galaxy_api_key }} buluma ${{ github.event.repository.name }}
 
   dependabot:
     needs:
