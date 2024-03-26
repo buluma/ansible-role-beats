@@ -11,9 +11,9 @@ beats_client_beats_packages:
 # Identifier for host sending logs. Sane default as hostname.
 beats_client_shipper_name: "{{ ansible_hostname }}"
 
-beats_client_version: 6.1.2
+beats_client_version: "6.1.2"
 # The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
-beats_client_major_version_abbreviated: 6.x
+beats_client_major_version_abbreviated: "6.x"
 
 beats_client_beats_prereq:
   - apt-transport-https
@@ -144,14 +144,14 @@ beats_client_heartbeat_config: {}
 #        enabled: true
 #        index: "{{ beats_client_kibana_indices['metricbeat'] }}"
 
-beats_client_kibana_url_base: http://localhost:9200
+beats_client_kibana_url_base: "http://localhost:9200"
 beats_client_kibana_url: "{{ beats_client_kibana_url_base }}/.kibana"
 beats_client_kibana_indices:
   metricbeat: metrics-logstash-*
   filebeat: syslog-*
-beats_client_kibana_dash_search:
-  metricbeat: Metricbeat*
-  filebeat: Filebeat*
+# beats_client_kibana_dash_search:
+#   metricbeat: Metricbeat*
+#   filebeat: Filebeat*
 
 #### SHARED ##################################################################
 
