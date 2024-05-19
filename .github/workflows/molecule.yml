@@ -47,6 +47,8 @@ jobs:
       matrix:
         config:
           - image: "docker-molecule-images"
+            tag: "buster"
+          - image: "docker-molecule-images"
             tag: "bullseye"
     steps:
       - name: Checkout Role
