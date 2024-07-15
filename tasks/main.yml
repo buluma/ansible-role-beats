@@ -47,3 +47,4 @@
     {{ item }} setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
   with_items: "{{ beats_client_beats_packages }}"
   when: beats_client_inject_templates
+  changed_when: false
