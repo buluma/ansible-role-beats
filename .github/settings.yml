@@ -5,4 +5,4 @@
 repository:
   description: Deploys and configure Elastic beats
   homepage: https://buluma.github.io/
-  topics: monitoring, logging, security, metrics, topbeat, filebeat, elk, ansible, molecule, tox, playbook
+  topics: monitoring, logging, security, metrics, topbeat, filebeat, elk, ansible, molecule, playbook
