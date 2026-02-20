@@ -51,7 +51,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 
 ```yaml
 ---
-#### PACKAGING #################################################################
+# ### PACKAGING #################################################################
 
 # The libbeat packages to install.
 # Options: www.elastic.co/guide/en/beats/libbeat/master/installing-beats.html
@@ -113,7 +113,6 @@ beats_client_logfiles:
 # See
 # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_literal_tags_literal
 beats_client_extra_logfiles: []
-
 beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles }}"
 
 beats_client_filebeat_logging:
@@ -173,11 +172,9 @@ beats_client_metricbeat_config:
 #### PACKETBEAT ##################################################################
 # See: www.elastic.co/guide/en/beats/packetbeat/master/configuring-packetbeat.html
 beats_client_packetbeat_config: {}
-
-#### HEARTBEAT ##################################################################
+# ### HEARTBEAT ##################################################################
 beats_client_heartbeat_config: {}
-
-#### KIBANA ##################################################################
+# ### KIBANA ##################################################################
 
 # Section more for testing at this point. Previously for <=5.x this role was
 # assisting with dashboard import. Now that the feature is integrated into the
@@ -219,7 +216,6 @@ beats_client_output:
 # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-dashboards.html
 beats_client_filebeat_setup: {}
 beats_client_metricbeat_setup: {}
-
 # Master config dictionary variable.
 beats_clients_configs:
   filebeat: "{{ beats_client_filebeat_config }}"
