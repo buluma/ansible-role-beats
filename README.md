@@ -51,7 +51,6 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 
 ```yaml
 ---
-
 #### PACKAGING #################################################################
 
 # The libbeat packages to install.
@@ -83,7 +82,6 @@ beats_client_inject_templates: false
 
 #### FILEBEAT ##################################################################
 
-
 # Sane default of localhost. Override to set to the IP address/DNS of the Logstash server.
 beats_client_logserver: "127.0.0.1"
 beats_client_port: 5000
@@ -95,21 +93,21 @@ beats_client_logfiles:
   - paths:
       - /var/log/syslog
       - /var/log/auth.log
-    tags: ['syslog']
+    tags: ["syslog"]
 
   - paths:
       - /var/log/dpkg.log
-    tags: ['dpkg']
+    tags: ["dpkg"]
 
   - paths:
       - /var/log/apache2/*log
-    tags: ['apache']
+    tags: ["apache"]
 
   - paths:
       - /var/log/mail.info
       - /var/log/mail.warn
       - /var/log/mail.err
-    tags: ['postfix']
+    tags: ["postfix"]
 
 # To send additional logfiles, override the following list.
 # See
@@ -153,7 +151,7 @@ beats_client_metricbeat_modules:
       - socket
     enabled: true
     period: "{{ beats_client_topbeat_period }}s"
-    processes: ['.*']
+    processes: [".*"]
 
 beats_client_metricbeat_logging:
   level: warning
