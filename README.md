@@ -11,36 +11,34 @@ Deploys and configure Elastic beats
 This example is taken from [`molecule/default/converge.yml`](https://github.com/buluma/ansible-role-beats/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
 
 ```yaml
----
-- name: Converge
-  hosts: all
-  become: true
-  gather_facts: true
+  - name: Converge
+    hosts: all
+    become: true
+    gather_facts: true
 
-  vars:
-    adminer_add_apache_config: true
+    vars:
+      adminer_add_apache_config: true
 
-  pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
-      changed_when: false
+    pre_tasks:
+      - name: Update apt cache.
+        apt: update_cache=true cache_valid_time=600
+        when: ansible_os_family == 'Debian'
+        changed_when: false
 
-  roles:
-    - role: buluma.beats
+    roles:
+      - role: buluma.beats
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-beats/blob/master/molecule/default/prepare.yml):
 
 ```yaml
----
-- name: Prepare
-  hosts: all
-  become: true
-  gather_facts: false
+  - name: Prepare
+    hosts: all
+    become: true
+    gather_facts: false
 
-  roles:
-    - role: buluma.bootstrap
+    roles:
+      - role: buluma.bootstrap
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -50,7 +48,6 @@ Also see a [full explanation and example](https://buluma.github.io/how-to-use-th
 The default values for the variables are set in [`defaults/main.yml`](https://github.com/buluma/ansible-role-beats/blob/master/defaults/main.yml):
 
 ```yaml
----
 # ### PACKAGING #################################################################
 
 # The libbeat packages to install.
@@ -74,7 +71,8 @@ beats_client_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 beats_client_elastic_gpg_key_url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
 # Elastic's beats debian repository
-beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
+beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated
+  }}/apt stable main"
 
 # Whether to inject templates (should really only be run on the same system that
 # has direct elasticsearch access
@@ -113,7 +111,8 @@ beats_client_logfiles:
 # See
 # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_literal_tags_literal
 beats_client_extra_logfiles: []
-beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles }}"
+beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles
+  }}"
 
 beats_client_filebeat_logging:
   level: warning
