@@ -56,8 +56,8 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # The libbeat packages to install.
 # Options: www.elastic.co/guide/en/beats/libbeat/master/installing-beats.html
 beats_client_beats_packages:
-- filebeat
-- metricbeat
+  - filebeat
+  - metricbeat
 
 # Identifier for host sending logs. Sane default as hostname.
 beats_client_shipper_name: "{{ ansible_hostname }}"
@@ -67,15 +67,14 @@ beats_client_version: "6.1.2"
 beats_client_major_version_abbreviated: "6.x"
 
 beats_client_beats_prereq:
-- apt-transport-https
+  - apt-transport-https
 
 # Elastic's PGP key for signing their repository
 beats_client_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
 beats_client_elastic_gpg_key_url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
 # Elastic's beats debian repository
-beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated
-  }}/apt stable main"
+beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
 
 # Whether to inject templates (should really only be run on the same system that
 # has direct elasticsearch access
@@ -91,31 +90,30 @@ beats_client_port: 5000
 beats_client_topbeat_period: 10
 
 beats_client_logfiles:
-- paths:
-  - /var/log/syslog
-  - /var/log/auth.log
-  tags: ["syslog"]
+  - paths:
+      - /var/log/syslog
+      - /var/log/auth.log
+    tags: ["syslog"]
 
-- paths:
-  - /var/log/dpkg.log
-  tags: ["dpkg"]
+  - paths:
+      - /var/log/dpkg.log
+    tags: ["dpkg"]
 
-- paths:
-  - /var/log/apache2/*log
-  tags: ["apache"]
+  - paths:
+      - /var/log/apache2/*log
+    tags: ["apache"]
 
-- paths:
-  - /var/log/mail.info
-  - /var/log/mail.warn
-  - /var/log/mail.err
-  tags: ["postfix"]
+  - paths:
+      - /var/log/mail.info
+      - /var/log/mail.warn
+      - /var/log/mail.err
+    tags: ["postfix"]
 
 # To send additional logfiles, override the following list.
 # See
 # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html#_literal_tags_literal
 beats_client_extra_logfiles: []
-beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles
-  }}"
+beats_client_filebeat_combined_logfiles: "{{ beats_client_logfiles + beats_client_extra_logfiles }}"
 
 beats_client_filebeat_logging:
   level: warning
@@ -139,20 +137,20 @@ beats_client_filebeat_config:
 
 # See: www.elastic.co/guide/en/beats/metricbeat/master/metricbeat-modules.html
 beats_client_metricbeat_modules:
-- module: system
-  metricsets:
-  - cpu
-  - load
-  - diskio
-  - filesystem
-  - fsstat
-  - memory
-  - network
-  - process
-  - socket
-  enabled: true
-  period: "{{ beats_client_topbeat_period }}s"
-  processes: [".*"]
+  - module: system
+    metricsets:
+      - cpu
+      - load
+      - diskio
+      - filesystem
+      - fsstat
+      - memory
+      - network
+      - process
+      - socket
+    enabled: true
+    period: "{{ beats_client_topbeat_period }}s"
+    processes: [".*"]
 
 beats_client_metricbeat_logging:
   level: warning
@@ -211,7 +209,7 @@ beats_client_output:
   logstash:
     enabled: true
     hosts:
-    - "{{ beats_client_logserver }}:{{ beats_client_port }}"
+      - "{{ beats_client_logserver }}:{{ beats_client_port }}"
 
 # Added in 6.x series for among other things,
 # dashboard setup
