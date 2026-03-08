@@ -8,10 +8,10 @@
     adminer_add_apache_config: true
 
   pre_tasks:
-  - name: Update apt cache.
-    apt: update_cache=true cache_valid_time=600
-    when: ansible_os_family == 'Debian'
-    changed_when: false
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
 
   roles:
-  - role: buluma.beats
+    - role: buluma.beats
