@@ -1,9 +1,9 @@
 ---
 - name: Add ElasticSearch apt key.
-  ansible.builtin.apt_key:
-    id: "{{ beats_client_elastic_pgp_key }}"
+  ansible.builtin.get_url:
     url: "{{ beats_client_elastic_gpg_key_url }}"
-    state: present
+    dest: /etc/apt/trusted.gpg.d/beats.asc
+    mode: "0644"
 
 - name: Install beats pre-req software
   ansible.builtin.apt:
