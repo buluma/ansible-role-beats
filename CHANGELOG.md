@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/buluma/ansible-role-beats/tree/HEAD)
+## [26.6.0](https://github.com/buluma/ansible-role-beats/tree/26.6.0) (2026-06-14)
 
-[Full Changelog](https://github.com/buluma/ansible-role-beats/compare/24.2.26...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-beats/compare/24.2.26...26.6.0)
 
 **Merged pull requests:**
 
