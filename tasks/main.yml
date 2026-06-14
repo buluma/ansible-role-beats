@@ -8,7 +8,7 @@
 - name: Install beats pre-req software
   ansible.builtin.apt:
     name: "{{ item }}"
-  with_items: "{{ beats_client_beats_prereq }}"
+  loop: "{{ beats_client_beats_prereq }}"
 
 - name: Add Beats apt repository.
   ansible.builtin.apt_repository:
@@ -19,7 +19,7 @@
   ansible.builtin.apt:
     name: "{{ item }}={{ beats_client_version }}"
     state: present
-  with_items: "{{ beats_client_beats_packages }}"
+  loop: "{{ beats_client_beats_packages }}"
 
 - name: Copy beat configuration
   become: true
@@ -30,7 +30,7 @@
     owner: root
     group: root
   notify: "Restart {{ item }}"
-  with_items: "{{ beats_client_beats_packages }}"
+  loop: "{{ beats_client_beats_packages }}"
 
 - name: Enable beat service
   become: true
@@ -38,13 +38,13 @@
     name: "{{ item }}"
     state: started
     enabled: true
-  with_items: "{{ beats_client_beats_packages }}"
+  loop: "{{ beats_client_beats_packages }}"
   tags:
     - molecule-notest
 
 - name: Load default templates into elasticsearch
   ansible.builtin.command: |
     {{ item }} setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
-  with_items: "{{ beats_client_beats_packages }}"
+  loop: "{{ beats_client_beats_packages }}"
   when: beats_client_inject_templates
   changed_when: false
