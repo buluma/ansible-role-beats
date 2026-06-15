@@ -1,9 +1,15 @@
 ---
-- name: Add ElasticSearch apt key.
+- name: Download ElasticSearch apt key
   ansible.builtin.get_url:
     url: "{{ beats_client_elastic_gpg_key_url }}"
-    dest: /etc/apt/trusted.gpg.d/beats.asc
+    dest: /tmp/elastic-beats.asc
     mode: "0644"
+
+- name: Import ElasticSearch apt key
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /usr/share/keyrings/elastic-beats.gpg /tmp/elastic-beats.asc
+    creates: /usr/share/keyrings/elastic-beats.gpg
+  changed_when: false
 
 - name: Install beats pre-req software
   ansible.builtin.apt:
@@ -17,7 +23,7 @@
 
 - name: Install beat packages.
   ansible.builtin.apt:
-    name: "{{ item }}={{ beats_client_version }}"
+    name: "{{ item }}{% if beats_client_version %}={{ beats_client_version }}{% endif %}"
     state: present
   loop: "{{ beats_client_beats_packages }}"
 
@@ -39,6 +45,7 @@
     state: started
     enabled: true
   loop: "{{ beats_client_beats_packages }}"
+  failed_when: false
 
 - name: Load default templates into elasticsearch
   ansible.builtin.command: |
