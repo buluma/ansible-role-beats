@@ -22,8 +22,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+
+        update_cache: true
+
+        cache_valid_time: 600
+      when: ansible_facts['os_family'] == 'Debian'
       changed_when: false
 
   roles:
@@ -39,8 +43,16 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
   become: true
   gather_facts: false
 
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo"
+      become: false
+      changed_when: false
+      failed_when: false
+
   roles:
     - role: buluma.bootstrap
+    - role: buluma.ca_certificates
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -60,21 +72,20 @@ beats_client_beats_packages:
   - metricbeat
 
 # Identifier for host sending logs. Sane default as hostname.
-beats_client_shipper_name: "{{ ansible_hostname }}"
+beats_client_shipper_name: "{{ ansible_facts['hostname'] }}"
 
-beats_client_version: "6.1.2"
+beats_client_version: ""
 # The apt repo URL pegs minor versions (e.g. 5.x) to avoid unexpected upgrades
-beats_client_major_version_abbreviated: "6.x"
+beats_client_major_version_abbreviated: "8.x"
 
 beats_client_beats_prereq:
   - apt-transport-https
 
-# Elastic's PGP key for signing their repository
-beats_client_elastic_pgp_key: "46095ACC8548582C1A2699A9D27D666CD88E42B4"
+# Elastic's GPG key URL for signing their repository
 beats_client_elastic_gpg_key_url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
 # Elastic's beats debian repository
-beats_client_elastic_repo_url: "deb https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
+beats_client_elastic_repo_url: "deb [signed-by=/usr/share/keyrings/elastic-beats.gpg] https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
 
 # Whether to inject templates (should really only be run on the same system that
 # has direct elasticsearch access
@@ -235,6 +246,7 @@ The following roles are used to prepare a system. You can prepare your system in
 | Requirement | GitHub |
 |-------------|--------|
 |[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|
+|[buluma.ca_certificates](https://galaxy.ansible.com/buluma/ca_certificates)|[![Build Status GitHub](https://github.com/buluma/ansible-role-ca_certificates/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-ca_certificates/actions)|
 
 ## [Context](#context)
 
@@ -246,12 +258,14 @@ Here is an overview of related roles:
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
 |container|tags|
 |---------|----|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
@@ -269,6 +283,3 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 
 [buluma](https://buluma.github.io/)
 
-### Get Help
-- Report issues: https://github.com/buluma/ansible-role-beats/issues/new
-- See docs: https://docs.ansible.com/collection/gallery/ansible-role-beats
