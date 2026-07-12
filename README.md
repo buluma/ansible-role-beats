@@ -85,7 +85,8 @@ beats_client_beats_prereq:
 beats_client_elastic_gpg_key_url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
 # Elastic's beats debian repository
-beats_client_elastic_repo_url: "deb [signed-by=/usr/share/keyrings/elastic-beats.gpg] https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated }}/apt stable main"
+beats_client_elastic_repo_url: "deb [signed-by=/usr/share/keyrings/elastic-beats.gpg] https://artifacts.elastic.co/packages/{{ beats_client_major_version_abbreviated
+  }}/apt stable main"
 
 # Whether to inject templates (should really only be run on the same system that
 # has direct elasticsearch access
