@@ -55,7 +55,8 @@
     path: "{{ beats_client_repo.legacy_source }}"
     state: absent
 
-- name: Add Beats apt repository.
+# The noqa is there because ansible-lint can't validate the templated types.
+- name: Add Beats apt repository.  # noqa: args[module]
   ansible.builtin.deb822_repository:
     name: "{{ beats_client_repo.name }}"
     types: "{{ beats_client_repo.types }}"
